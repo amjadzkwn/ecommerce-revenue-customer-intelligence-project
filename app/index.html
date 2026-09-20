@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive e-commerce revenue and customer intelligence portfolio dashboard built from the public Olist dataset.">
+  <title>E-Commerce Revenue & Customer Intelligence</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">EC</span>
+        <div>
+          <strong>Commerce IQ</strong>
+          <small>Analytics Platform</small>
+        </div>
+      </div>
+
+      <nav aria-label="Dashboard sections">
+        <button class="nav-button active" data-view="overview"><span>01</span> Executive Overview</button>
+        <button class="nav-button" data-view="customers"><span>02</span> Customer Intelligence</button>
+        <button class="nav-button" data-view="market"><span>03</span> Market Performance</button>
+        <button class="nav-button" data-view="operations"><span>04</span> Delivery & Experience</button>
+      </nav>
+
+      <div class="source-card">
+        <p>Public dataset</p>
+        <strong>Olist Brazilian E-Commerce</strong>
+        <span>99k+ orders · 2016–2018</span>
+        <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce" target="_blank" rel="noreferrer">View source ↗</a>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">PORTFOLIO CASE STUDY</p>
+          <h1>E-Commerce Revenue & Customer Intelligence</h1>
+          <p class="subtitle">Commercial growth, customer value, and fulfilment performance in one analytical view.</p>
+        </div>
+        <button id="theme-toggle" class="icon-button" aria-label="Toggle dark mode">◐</button>
+      </header>
+
+      <section class="filter-bar" aria-label="Dashboard filters">
+        <label>From month
+          <select id="from-month"></select>
+        </label>
+        <label>To month
+          <select id="to-month"></select>
+        </label>
+        <label>Top categories
+          <select id="top-n">
+            <option value="5">Top 5</option>
+            <option value="10" selected>Top 10</option>
+            <option value="15">Top 15</option>
+          </select>
+        </label>
+        <button id="reset-filters" class="reset-button">Reset filters</button>
+        <span id="data-period" class="period-chip"></span>
+      </section>
+
+      <section id="overview" class="view active">
+        <div class="kpi-grid">
+          <article class="kpi-card blue"><span>Realized GMV</span><strong id="kpi-gmv">—</strong><small>Delivered item value</small></article>
+          <article class="kpi-card violet"><span>Delivered orders</span><strong id="kpi-orders">—</strong><small id="kpi-order-share">—</small></article>
+          <article class="kpi-card green"><span>Average order value</span><strong id="kpi-aov">—</strong><small>GMV per delivered order</small></article>
+          <article class="kpi-card coral"><span>Average review</span><strong id="kpi-review">—</strong><small>Latest score per order</small></article>
+        </div>
+
+        <div class="grid two-thirds">
+          <article class="panel tall">
+            <div class="panel-head"><div><p>Commercial trend</p><h2>Monthly realized GMV</h2></div><span class="tag">BRL</span></div>
+            <canvas id="monthly-chart"></canvas>
+          </article>
+          <article class="panel tall">
+            <div class="panel-head"><div><p>Order outcome</p><h2>Status mix</h2></div></div>
+            <canvas id="status-chart"></canvas>
+          </article>
+        </div>
+
+        <div class="grid equal">
+          <article class="panel">
+            <div class="panel-head"><div><p>Product performance</p><h2>Top categories by realized GMV</h2></div></div>
+            <canvas id="category-chart"></canvas>
+          </article>
+          <article class="panel insight-panel">
+            <div class="panel-head"><div><p>Management focus</p><h2>Three actions from the data</h2></div></div>
+            <ol>
+              <li><strong>Convert the second purchase.</strong><span>Repeat-customer rate is only 3.0%. Trigger a 30–45 day personalised journey after delivery.</span></li>
+              <li><strong>Reduce severe lateness.</strong><span>Orders 8+ days late average 1.73 stars, versus 4.32 for orders at least 8 days early.</span></li>
+              <li><strong>Protect high-value categories.</strong><span>Use bundles and cross-sell tests while monitoring freight and delivery risk.</span></li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <section id="customers" class="view">
+        <div class="section-intro"><p>CUSTOMER INTELLIGENCE</p><h2>Who creates value, and who needs attention?</h2></div>
+        <div class="kpi-grid compact">
+          <article class="kpi-card blue"><span>Delivered customers</span><strong id="customer-count">—</strong><small>Persistent customer IDs</small></article>
+          <article class="kpi-card violet"><span>Repeat customer rate</span><strong id="repeat-rate">—</strong><small>2+ delivered orders</small></article>
+          <article class="kpi-card green"><span>Champion GMV share</span><strong id="champion-share">—</strong><small>Highest RFM group</small></article>
+          <article class="kpi-card coral"><span>Customer segments</span><strong id="segment-count">—</strong><small>Action-oriented RFM groups</small></article>
+        </div>
+        <div class="grid equal">
+          <article class="panel tall"><div class="panel-head"><div><p>Customer portfolio</p><h2>RFM segment value</h2></div></div><canvas id="rfm-chart"></canvas></article>
+          <article class="panel tall"><div class="panel-head"><div><p>Retention</p><h2>Repeat activity by cohort month</h2></div><span class="tag">First 6 months</span></div><div id="cohort-table" class="cohort-wrap"></div></article>
+        </div>
+        <article class="panel table-panel"><div class="panel-head"><div><p>Segment playbook</p><h2>Recommended commercial treatment</h2></div></div><div id="rfm-table" class="data-table"></div></article>
+      </section>
+
+      <section id="market" class="view">
+        <div class="section-intro"><p>MARKET PERFORMANCE</p><h2>Where does commercial value concentrate?</h2></div>
+        <div class="grid equal">
+          <article class="panel tall"><div class="panel-head"><div><p>Geography</p><h2>Top states by realized GMV</h2></div></div><canvas id="state-chart"></canvas></article>
+          <article class="panel tall"><div class="panel-head"><div><p>Customer checkout</p><h2>Payment value mix</h2></div></div><canvas id="payment-chart"></canvas></article>
+        </div>
+        <article class="panel table-panel"><div class="panel-head"><div><p>Seller concentration</p><h2>Highest-value sellers</h2></div></div><div id="seller-table" class="data-table"></div></article>
+      </section>
+
+      <section id="operations" class="view">
+        <div class="section-intro"><p>DELIVERY & EXPERIENCE</p><h2>How does fulfilment shape customer satisfaction?</h2></div>
+        <div class="kpi-grid compact">
+          <article class="kpi-card green"><span>On-time rate</span><strong id="ontime-rate">—</strong><small>Actual date ≤ estimate</small></article>
+          <article class="kpi-card coral"><span>8+ days late review</span><strong id="late-review">—</strong><small>Average review score</small></article>
+          <article class="kpi-card blue"><span>8+ days early review</span><strong id="early-review">—</strong><small>Average review score</small></article>
+          <article class="kpi-card violet"><span>Review gap</span><strong id="review-gap">—</strong><small>Early minus severely late</small></article>
+        </div>
+        <div class="grid equal">
+          <article class="panel tall"><div class="panel-head"><div><p>Experience penalty</p><h2>Review score by delivery variance</h2></div></div><canvas id="delivery-chart"></canvas></article>
+          <article class="panel tall"><div class="panel-head"><div><p>State service level</p><h2>On-time rate by major state</h2></div></div><canvas id="sla-chart"></canvas></article>
+        </div>
+        <article class="panel note-panel"><strong>Interpretation</strong><p>Late delivery and low review score move together strongly in this dataset. This supports prioritising SLA improvement, but the relationship is observational and should not be presented as proof of causality.</p></article>
+      </section>
+
+      <footer>
+        <span>Built with Python, SQL, Excel, HTML, CSS & JavaScript</span>
+        <span>Realized GMV excludes freight and is not net revenue or profit.</span>
+      </footer>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

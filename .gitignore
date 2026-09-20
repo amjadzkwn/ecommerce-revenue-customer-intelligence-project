@@ -1,0 +1,6 @@
+__pycache__/
+.venv/
+.DS_Store
+source_data/*.zip
+data/raw/*.csv
+*.log

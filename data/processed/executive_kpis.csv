@@ -1,0 +1,10 @@
+metric,value,definition
+Total orders,99441.0,Distinct orders in the source dataset
+Delivered orders,96478.0,Distinct orders with order_status = delivered
+Realized GMV (BRL),13221498.11,Sum of item price for delivered orders; not net platform revenue
+Average order value (BRL),137.04,Delivered realized GMV divided by delivered orders
+Unique customers,93358.0,Distinct persistent customer identities among delivered orders
+Repeat customer rate,0.03000278497825575,Share of delivered customers with at least two delivered orders
+On-time delivery rate,0.9188710145528421,Delivered on or before the estimated delivery date
+Cancellation / unavailable rate,0.012409368369183738,Orders marked canceled or unavailable divided by total orders
+Average review score,4.09,Mean latest review score by order
