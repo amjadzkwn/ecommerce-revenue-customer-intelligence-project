@@ -1,0 +1,8 @@
+check,rows,missing,duplicates,status
+orders.order_id,99441,0,0,PASS
+customers.customer_id,99441,0,0,PASS
+products.product_id,32951,0,0,PASS
+sellers.seller_id,3095,0,0,PASS
+fact_orders one row per order,99441,0,0,PASS
+orders matched to customer,99441,0,0,PASS
+delivered order dates available,96478,8,0,PASS

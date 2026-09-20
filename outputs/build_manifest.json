@@ -1,0 +1,34 @@
+{
+  "source": "https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce",
+  "source_title": "Brazilian E-Commerce Public Dataset by Olist",
+  "source_rows": {
+    "customers": 99441,
+    "geolocation": 1000163,
+    "order_items": 112650,
+    "payments": 103886,
+    "reviews": 99224,
+    "orders": 99441,
+    "products": 32951,
+    "sellers": 3095,
+    "translation": 71
+  },
+  "output_rows": {
+    "fact_orders": 99441,
+    "fact_order_items": 112650,
+    "customer_rfm": 93358,
+    "monthly_kpis": 25,
+    "rfm_summary": 5,
+    "cohort_retention": 23,
+    "cohort_retention_long": 219,
+    "category_performance": 74,
+    "state_performance": 27,
+    "seller_performance": 3095,
+    "payment_mix": 5,
+    "delivery_review": 5,
+    "order_status_summary": 8,
+    "executive_kpis": 9
+  },
+  "date_min": "2016-09-04 21:15:19",
+  "date_max": "2018-10-17 17:30:18",
+  "currency": "BRL"
+}
